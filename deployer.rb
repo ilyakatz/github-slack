@@ -30,24 +30,45 @@ end
 helpers do
 
   def process_circle_ci(payload)
-    client.create_status(
-      payload["name"],
-      payload["sha"],
-      build_status,
-      opts
-    )
+    if pivotal_ticket_present?(pull_request["head"]["ref"])
+      client.create_status(
+        payload["name"],
+        payload["sha"],
+        build_status,
+        opts.merge("description" => slack_channel_topic)
+      )
+    end
   end
 
   def process_pull_request(pull_request)
-    client.create_status(
-      pull_request['base']['repo']['full_name'],
-      pull_request['head']['sha'],
-      build_status,
-      opts)
+    if pivotal_ticket_present?(pull_request["head"]["ref"])
+      client.create_status(
+        repo_name(pull_request),
+        pull_request['head']['sha'],
+        build_status,
+        opts.merge("description" => slack_channel_topic)
+      )
+    else
+      client.create_status(
+        repo_name(pull_request),
+        pull_request['head']['sha'],
+        "error",
+        opts.merge("description" => "Branch name doesn't include pivotal ID")
+      )
+    end
+
   end
 
   def client
     @client ||= Octokit::Client.new(:access_token => ACCESS_TOKEN)
+  end
+
+  def pivotal_ticket_present?(branch_name)
+    !!(branch_name =~ /(\d{6,10})/)
+  end
+
+  def repo_name(pull_request)
+    pull_request['base']['repo']['full_name']
   end
 
   def build_status
@@ -57,7 +78,6 @@ helpers do
   def opts
     {
       "target_url" => "https://execonline.slack.com",
-      "description" => slack_channel_topic,
       "context" => "exo/deploy"
     }
   end
