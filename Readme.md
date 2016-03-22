@@ -45,3 +45,7 @@ You can run sample requests manually using Postman
 ![Alt text](https://monosnap.com/file/0JFDd38uJT6nOHTk1wWKa89JNX0h1h.png)
 
 Directory `samples/` contains sample requests for each `X-GitHub-Event`
+
+# Deploy
+
+`git push heroku master`
