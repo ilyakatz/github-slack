@@ -7,7 +7,21 @@ Validate that branch name of a pull request has Pivotal ID
 Warn developers if there is message the group in the Slack room
 ![Alt text](https://monosnap.com/file/YrPXgXfSVWhtasbrgUxyz5UAdHx39e.png)
 
+# Github repo config
+
+Configuration of hooks can be access in the repo settings
+
+![Alt text](https://monosnap.com/file/NxqohNVLATwCjz1iWXPHULW380BVnR.png)
+
 # Install
+
+## Tokens
+
+Generate a new Github token
+
+https://github.com/settings/tokens/new
+
+With `repo` scopes
 
 ## Local
 
@@ -18,6 +32,16 @@ bundle install
 ```
 
 ```
+export MY_PERSONAL_TOKEN=5aa5e7.......d5139f
+
 bundle exec ruby deployer.rb
 
 ```
+
+# Sample request
+
+You can run sample requests manually using Postman
+
+![Alt text](https://monosnap.com/file/0JFDd38uJT6nOHTk1wWKa89JNX0h1h.png)
+
+Directory `samples/` contains sample requests for each `X-GitHub-Event`
