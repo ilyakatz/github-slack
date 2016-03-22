@@ -30,7 +30,7 @@ end
 helpers do
 
   def process_circle_ci(payload)
-    if pivotal_ticket_present?(pull_request["head"]["ref"])
+    if leankit_ticket_present?(pull_request["head"]["ref"])
       client.create_status(
         payload["name"],
         payload["sha"],
@@ -41,7 +41,7 @@ helpers do
   end
 
   def process_pull_request(pull_request)
-    if pivotal_ticket_present?(pull_request["head"]["ref"])
+    if leankit_ticket_present?(pull_request["head"]["ref"])
       client.create_status(
         repo_name(pull_request),
         pull_request['head']['sha'],
@@ -53,7 +53,7 @@ helpers do
         repo_name(pull_request),
         pull_request['head']['sha'],
         "error",
-        opts.merge("description" => "Branch name doesn't include pivotal ID")
+        opts.merge("description" => "Branch name doesn't include LeanKit ID")
       )
     end
 
@@ -63,7 +63,7 @@ helpers do
     @client ||= Octokit::Client.new(:access_token => ACCESS_TOKEN)
   end
 
-  def pivotal_ticket_present?(branch_name)
+  def leankit_ticket_present?(branch_name)
     !!(branch_name =~ /(\d{6,10})/)
   end
 
