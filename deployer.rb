@@ -48,7 +48,7 @@ helpers do
         build_status,
         opts.merge("description" => slack_channel_topic)
       )
-    if hotfix?(pull_request["head"]["ref"])
+    elsif hotfix?(pull_request["head"]["ref"])
         client.create_status(
           repo_name(pull_request),
           pull_request['head']['sha'],
