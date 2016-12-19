@@ -21,7 +21,7 @@ post '/' do
   end
 
   if @payload["context"] && @payload["context"] == "ci/circleci"
-    process_circle_ci(@payload)
+    process_circle_ci(@payload["pull_request"])
   end
 
   "OK"
