@@ -35,6 +35,7 @@ GEM
     rb-fsevent (0.9.6)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
+    rb-readline (0.5.3)
     sawyer (0.6.0)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
@@ -61,8 +62,9 @@ DEPENDENCIES
   ngrok
   octokit
   pry
+  rb-readline
   sinatra
   slack-api
 
 BUNDLED WITH
-   1.10.6
+   1.12.5

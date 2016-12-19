@@ -48,11 +48,18 @@ helpers do
         build_status,
         opts.merge("description" => slack_channel_topic)
       )
+    if hotfix?(pull_request["head"]["ref"])
+        client.create_status(
+          repo_name(pull_request),
+          pull_request['head']['sha'],
+          build_status,
+          opts.merge("description" => "This is a hotfix!")
+        )
     else
       client.create_status(
         repo_name(pull_request),
         pull_request['head']['sha'],
-        "error",
+        "success",
         opts.merge("description" => "Branch name doesn't include LeanKit ID")
       )
     end
@@ -65,6 +72,10 @@ helpers do
 
   def leankit_ticket_present?(branch_name)
     !!(branch_name =~ /(\d{6,10})/)
+  end
+
+  def hotfix?(branch_name)
+    !!(branch_name =~ /production-/)
   end
 
   def repo_name(pull_request)
