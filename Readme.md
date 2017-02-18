@@ -49,3 +49,17 @@ Directory `samples/` contains sample requests for each `X-GitHub-Event`
 # Deploy
 
 `git push heroku master`
+
+# Docker
+
+## Start the environment
+
+```
+eval "$(docker-machine env dev)"
+docker build -t exo-deployer .
+docker run -p 4567:4567 exo-deployer
+```
+
+Application will run on
+
+`docker-machine ip dev`:4567
