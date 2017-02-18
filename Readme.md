@@ -56,10 +56,14 @@ Directory `samples/` contains sample requests for each `X-GitHub-Event`
 
 ```
 eval "$(docker-machine env dev)"
-docker build -t exo-deployer .
-docker run -p 4567:4567 exo-deployer
+docker build -t execonline-inc/github-integrations .
+docker run -p 4567:4567 execonline-inc/github-integrations
 ```
 
 Application will run on
 
 `docker-machine ip dev`:4567
+
+## Deploy on ECS
+
+https://aws.amazon.com/getting-started/tutorials/deploy-docker-containers/
