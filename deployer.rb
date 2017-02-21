@@ -11,6 +11,10 @@ Slack.configure do |config|
   config.token = ENV['SLACK_TOKEN']
 end
 
+get '/' do
+  "Hello from sinatra! The time is #{ Time.now.to_i } on #{ `hostname` }!"
+end
+
 post '/' do
   body = request.body.read
   @payload = JSON.parse(body)

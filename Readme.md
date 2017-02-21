@@ -55,6 +55,7 @@ Directory `samples/` contains sample requests for each `X-GitHub-Event`
 ## Start the environment
 
 ```
+docker-machine start dev
 eval "$(docker-machine env dev)"
 docker build -t execonline-inc/github-integrations .
 docker run -p 4567:4567 execonline-inc/github-integrations
@@ -67,3 +68,8 @@ Application will run on
 ## Deploy on ECS
 
 https://aws.amazon.com/getting-started/tutorials/deploy-docker-containers/
+http://blog.honeybadger.io/how-to-deploy-a-sinatra-app-in-docker-to-amazon-s-ec2-container-service/
+
+```
+docker push 738984711291.dkr.ecr.us-east-1.amazonaws.com/github-integrations:latest
+```
