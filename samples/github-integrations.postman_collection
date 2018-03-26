@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "github-integrations",
+		"_postman_id": "9c6faf01-15ad-f05a-ad72-20a59aa9847e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pull-request",
+			"request": {
+				"url": "localhost:4567",
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-GitHub-Event",
+						"value": "pull_request",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"action\": \"opened\",\n  \"number\": 1915,\n  \"pull_request\": {\n    \"url\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/1915\",\n    \"id\": 63739224,\n    \"html_url\": \"https://github.com/execonline-inc/exec_online/pull/1915\",\n    \"diff_url\": \"https://github.com/execonline-inc/exec_online/pull/1915.diff\",\n    \"patch_url\": \"https://github.com/execonline-inc/exec_online/pull/1915.patch\",\n    \"issue_url\": \"https://api.github.com/repos/execonline-inc/exec_online/issues/1915\",\n    \"number\": 1915,\n    \"state\": \"open\",\n    \"locked\": false,\n    \"title\": \"test\",\n    \"user\": {\n      \n    },\n    \"body\": \"Feature Checklist\\r\\n\\r\\n- [ ] Appropriate logging (auditing) was added\\r\\n- [ ] Appropriate permissions were added\\r\\n\\r\\n\",\n    \"created_at\": \"2016-03-22T15:27:54Z\",\n    \"updated_at\": \"2016-03-22T15:27:54Z\",\n    \"closed_at\": null,\n    \"merged_at\": null,\n    \"merge_commit_sha\": \"8bd03\",\n    \"assignee\": null,\n    \"milestone\": null,\n    \"commits_url\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/1915/commits\",\n    \"review_comments_url\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/1915/comments\",\n    \"review_comment_url\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/comments{/number}\",\n    \"comments_url\": \"https://api.github.com/repos/execonline-inc/exec_online/issues/1915/comments\",\n    \"statuses_url\": \"https://api.github.com/repos/execonline-inc/exec_online/statuses/baf38e442d091620f9937ffdfb7d3d9b93f146f3\",\n    \"head\": {\n      \"label\": \"execonline-inc:test_1\",\n      \"ref\": \"test_1\",\n      \"sha\": \"baf38e442d091620f9937ffdfb7d3d9b93f146f3\",\n      \"user\": {\n        \n      },\n      \"repo\": {\n        \"id\": 7607948,\n        \"name\": \"exec_online\",\n        \"full_name\": \"execonline-inc/exec_online\",\n        \"owner\": {\n        }\n        \n      }\n    },\n    \"base\": {\n      \n      \"repo\": {\n        \"id\": 7607948,\n        \"name\": \"exec_online\",\n        \"full_name\": \"execonline-inc/exec_online\",\n        \"owner\": {\n        }\n        \n      }\n    },\n    \"_links\": {\n      \"self\": {\n        \"href\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/1915\"\n      },\n      \"html\": {\n        \"href\": \"https://github.com/execonline-inc/exec_online/pull/1915\"\n      },\n      \"issue\": {\n        \"href\": \"https://api.github.com/repos/execonline-inc/exec_online/issues/1915\"\n      },\n      \"comments\": {\n        \"href\": \"https://api.github.com/repos/execonline-inc/exec_online/issues/1915/comments\"\n      },\n      \"review_comments\": {\n        \"href\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/1915/comments\"\n      },\n      \"review_comment\": {\n        \"href\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/comments{/number}\"\n      },\n      \"commits\": {\n        \"href\": \"https://api.github.com/repos/execonline-inc/exec_online/pulls/1915/commits\"\n      },\n      \"statuses\": {\n      }\n    }\n\n  },\n  \"repository\": {\n    \n  },\n  \"organization\": {\n\n  },\n  \"sender\": {\n  }\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

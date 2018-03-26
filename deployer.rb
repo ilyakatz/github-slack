@@ -40,38 +40,28 @@ helpers do
     end
   end
 
+  # @param pull_request Hash hash that is returned by Github API that identifies a PR
   def process_pull_request(pull_request)
-    if leankit_ticket_present?(pull_request["head"]["ref"])
-      client.create_status(
-        repo_name(pull_request),
-        pull_request['head']['sha'],
-        build_status,
-        opts.merge("description" => slack_channel_topic)
-      )
-    elsif hotfix?(pull_request["head"]["ref"])
-        client.create_status(
-          repo_name(pull_request),
-          pull_request['head']['sha'],
-          build_status,
-          opts.merge("description" => "This is a hotfix!")
-        )
-    else
-      client.create_status(
-        repo_name(pull_request),
-        pull_request['head']['sha'],
-        "success",
-        opts.merge("description" => "Branch name doesn't include LeanKit ID")
-      )
-    end
-
+    client.create_status(
+      repo_name(pull_request),
+      pull_request['head']['sha'],
+      build_status(pull_request),
+      opts.merge(description: description(pull_request))
+    )
   end
 
   def client
     @client ||= Octokit::Client.new(:access_token => ACCESS_TOKEN)
   end
 
-  def leankit_ticket_present?(branch_name)
-    !!(branch_name =~ /(\d{6,10})/)
+  def leankit_ticket_present?(pull_request)
+    commit_messages(pull_request).any? do |comment|
+      leankit_identifiable?(comment)
+    end
+  end
+
+  def leankit_identifiable?(comment)
+    !!(comment =~ /(\d{6,10})/)
   end
 
   def hotfix?(branch_name)
@@ -82,8 +72,21 @@ helpers do
     pull_request['base']['repo']['full_name']
   end
 
-  def build_status
-    "success"
+  def pull_request_number(pull_request)
+    pull_request["number"]
+  end
+
+  def build_status(pull_request)
+    leankit_ticket_present?(pull_request) ? "success" : "error"
+  end
+
+  def description(pull_request)
+    d = leankit_ticket_present?(pull_request) ?
+      slack_channel_topic :
+      "None of the messages in the PR include LeanKit ID"
+
+    puts d
+    d
   end
 
   def opts
@@ -108,4 +111,16 @@ helpers do
     @slack_client = Slack::Client.new
   end
 
+  def commit_messages(pull_request)
+    name = repo_name(pull_request)
+    number = pull_request_number(pull_request)
+    commits = client.pull_request_commits(name, number)
+    commits.collect do |c|
+      c["commit"]["message"]
+    end
+  end
+
 end
+
+
+
