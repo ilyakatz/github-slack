@@ -31,6 +31,8 @@ gem install bundler
 bundle install
 ```
 
+https://github.com/settings/tokens
+
 ```
 export MY_PERSONAL_TOKEN=5aa5e7.......d5139f
 
